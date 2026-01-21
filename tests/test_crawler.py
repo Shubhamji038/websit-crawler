@@ -11,6 +11,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 from python_webcrawler import PythonWebCrawler, Result, parse_headers
+from webcrawler import UnifiedWebCrawler
 
 
 class TestPythonWebCrawler(unittest.TestCase):
@@ -38,11 +39,15 @@ class TestPythonWebCrawler(unittest.TestCase):
     def test_url_normalization(self):
         """Test URL normalization functionality"""
         # Test relative URL
-        normalized = self.crawler._normalize_url("https://example.com/page", "/test")
+        normalized = self.crawler._normalize_url(
+            "https://example.com/page", "/test"
+        )
         self.assertEqual(normalized, "https://example.com/test")
 
         # Test absolute URL
-        normalized = self.crawler._normalize_url("https://example.com", "https://other.com")
+        normalized = self.crawler._normalize_url(
+            "https://example.com", "https://other.com"
+        )
         self.assertEqual(normalized, "https://other.com")
 
         # Test invalid URLs
@@ -52,7 +57,9 @@ class TestPythonWebCrawler(unittest.TestCase):
         self.assertIsNone(
             self.crawler._normalize_url("https://example.com", "mailto:test@example.com")
         )
-        self.assertIsNone(self.crawler._normalize_url("https://example.com", ""))
+        self.assertIsNone(
+            self.crawler._normalize_url("https://example.com", "")
+        )
 
     def test_domain_filtering(self):
         """Test domain filtering logic"""
@@ -69,7 +76,9 @@ class TestPythonWebCrawler(unittest.TestCase):
         # Subdomain test
         crawler_with_subs = PythonWebCrawler(subs=True)
         self.assertTrue(
-            crawler_with_subs._is_allowed_domain("https://example.com", "https://sub.example.com")
+            crawler_with_subs._is_allowed_domain(
+                "https://example.com", "https://sub.example.com"
+            )
         )
 
     def test_path_filtering(self):
@@ -77,7 +86,9 @@ class TestPythonWebCrawler(unittest.TestCase):
         # Inside path
         crawler_inside = PythonWebCrawler(inside=True)
         self.assertTrue(
-            crawler_inside._is_inside_path("https://example.com/path", "https://example.com/path/page")
+            crawler_inside._is_inside_path(
+                "https://example.com/path", "https://example.com/path/page"
+            )
         )
         self.assertFalse(
             crawler_inside._is_inside_path("https://example.com/path", "https://example.com/other")

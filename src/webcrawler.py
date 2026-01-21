@@ -11,6 +11,11 @@ import os
 from python_webcrawler import PythonWebCrawler, parse_headers
 
 
+def get_output_path(filename):
+    """Get output path outside src directory"""
+    return os.path.join("..", "output", filename)
+
+
 class UnifiedWebCrawler:
     def __init__(self):
         self.last_results = []
@@ -64,7 +69,7 @@ class UnifiedWebCrawler:
                     return user_input.lower() in ['y', 'yes', 'true', '1']
                 else:
                     return user_input
-            except ValueError as e:
+            except ValueError:
                 print(f"❌ Invalid input. Please enter a valid {input_type.__name__}")
             except Exception as e:
                 print(f"❌ An error occurred: {e}")
@@ -103,7 +108,10 @@ class UnifiedWebCrawler:
             return
 
         # Export to TXT
-        with open(f"{filename}.txt", 'w', encoding='utf-8') as f:
+        output_dir = os.path.join("..", "output")
+        os.makedirs(output_dir, exist_ok=True)
+        filepath = os.path.join(output_dir, f"{filename}.txt")
+        with open(filepath, 'w', encoding='utf-8') as f:
             for result in crawler.results:
                 f.write(f"{result.url}\n")
 
@@ -396,21 +404,28 @@ class UnifiedWebCrawler:
             print("❌ No results to export")
             return
 
+        # Ensure output directory exists
+        output_dir = os.path.join("..", "output")
+        os.makedirs(output_dir, exist_ok=True)
+
         try:
             if export_format == "txt":
-                with open(f"{filename}.txt", 'w', encoding='utf-8') as f:
+                filepath = os.path.join(output_dir, f"{filename}.txt")
+                with open(filepath, 'w', encoding='utf-8') as f:
                     for result in self.last_results:
                         f.write(f"{result.url}\n")
                 print(f"📁 Saved: {filename}.txt")
 
             elif export_format == "json":
                 data = [result.to_dict() for result in self.last_results]
-                with open(f"{filename}.json", 'w', encoding='utf-8') as f:
+                filepath = os.path.join(output_dir, f"{filename}.json")
+                with open(filepath, 'w', encoding='utf-8') as f:
                     json.dump(data, f, indent=2, ensure_ascii=False)
                 print(f"📁 Saved: {filename}.json")
 
             elif export_format == "csv":
-                with open(f"{filename}.csv", 'w', newline='', encoding='utf-8') as f:
+                filepath = os.path.join(output_dir, f"{filename}.csv")
+                with open(filepath, 'w', newline='', encoding='utf-8') as f:
                     writer = csv.writer(f)
                     writer.writerow(['URL', 'Source', 'Where'])
                     for result in self.last_results:

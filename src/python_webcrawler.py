@@ -8,7 +8,6 @@ import argparse
 import asyncio
 import json
 import sys
-import time
 from typing import Set, Dict, List, Optional
 from urllib.parse import urljoin, urlparse, urlunparse
 import ssl
@@ -68,7 +67,8 @@ class PythonWebCrawler:
         # Default user agent
         self.custom_headers.setdefault(
             'User-Agent',
-            'Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0'
+            'Mozilla/5.0 (X11; Linux x86_64; rv:78.0) '
+            'Gecko/20100101 Firefox/78.0'
         )
 
     def _get_ssl_context(self):
@@ -129,7 +129,7 @@ class PythonWebCrawler:
             timeout = ClientTimeout(
                 total=self.timeout if self.timeout > 0 else None
             )
-            connector = aiohttp.TCPConnector(ssl=self._get_ssl_context())
+            _ = aiohttp.TCPConnector(ssl=self._get_ssl_context())
 
             async with self.session.get(
                 url,
@@ -267,29 +267,62 @@ async def main():
         description='Python Web Crawler - hakrawler-inspired crawler'
     )
 
-    parser.add_argument('-d', type=int, default=2, help='Depth to crawl (default: 2)')
-    parser.add_argument('-dr', action='store_true', help='Disable following HTTP redirects')
+    parser.add_argument(
+        '-d', type=int, default=2,
+        help='Depth to crawl (default: 2)'
+    )
+    parser.add_argument(
+        '-dr', action='store_true',
+        help='Disable following HTTP redirects'
+    )
     parser.add_argument(
         '--headers', type=str, default='',
         help='Custom headers separated by two semi-colons'
     )
-    parser.add_argument('-i', action='store_true', help='Only crawl inside path')
-    parser.add_argument('-insecure', action='store_true', help='Disable TLS verification')
-    parser.add_argument('-json', action='store_true', help='Output as JSON')
+    parser.add_argument(
+        '-i', action='store_true',
+        help='Only crawl inside path'
+    )
+    parser.add_argument(
+        '-insecure', action='store_true',
+        help='Disable TLS verification'
+    )
+    parser.add_argument(
+        '-json', action='store_true',
+        help='Output as JSON'
+    )
     parser.add_argument(
         '-proxy', type=str, default='',
         help='Proxy URL (e.g., http://127.0.0.1:8080)'
     )
-    parser.add_argument('-s', action='store_true', help='Show the source of URL')
-    parser.add_argument('-size', type=int, default=-1, help='Page size limit, in KB')
-    parser.add_argument('-subs', action='store_true', help='Include subdomains for crawling')
-    parser.add_argument('-t', type=int, default=8, help='Number of threads to utilize (default: 8)')
+    parser.add_argument(
+        '-s', action='store_true',
+        help='Show the source of URL'
+    )
+    parser.add_argument(
+        '-size', type=int, default=-1,
+        help='Page size limit, in KB'
+    )
+    parser.add_argument(
+        '-subs', action='store_true',
+        help='Include subdomains for crawling'
+    )
+    parser.add_argument(
+        '-t', type=int, default=8,
+        help='Number of threads to utilize (default: 8)'
+    )
     parser.add_argument(
         '-timeout', type=int, default=-1,
         help='Maximum time to crawl each URL, in seconds'
     )
-    parser.add_argument('-u', action='store_true', help='Show only unique URLs')
-    parser.add_argument('-w', action='store_true', help='Show at which link the URL is found')
+    parser.add_argument(
+        '-u', action='store_true',
+        help='Show only unique URLs'
+    )
+    parser.add_argument(
+        '-w', action='store_true',
+        help='Show at which link the URL is found'
+    )
 
     args = parser.parse_args()
 
