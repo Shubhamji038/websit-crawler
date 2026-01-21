@@ -11,7 +11,6 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 from python_webcrawler import PythonWebCrawler, Result, parse_headers
-from webcrawler import UnifiedWebCrawler
 
 
 class TestPythonWebCrawler(unittest.TestCase):

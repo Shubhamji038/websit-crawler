@@ -57,7 +57,9 @@ class UnifiedWebCrawler:
         while True:
             try:
                 if default is not None:
-                    user_input = input(f"{prompt} (default: {default}): ").strip()
+                    user_input = input(
+                    f"{prompt} (default: {default}): "
+                ).strip()
                     if not user_input:
                         return default
                 else:
@@ -66,7 +68,9 @@ class UnifiedWebCrawler:
                 if input_type == int:
                     return int(user_input)
                 elif input_type == bool:
-                    return user_input.lower() in ['y', 'yes', 'true', '1']
+                    return user_input.lower() in [
+                    'y', 'yes', 'true', '1'
+                ]
                 else:
                     return user_input
             except ValueError:
@@ -88,7 +92,9 @@ class UnifiedWebCrawler:
             print("❌ URL is required")
             return
 
-        filename = url.replace('https://', '').replace('http://', '').replace('/', '_')
+        filename = url.replace('https://', '').replace(
+            'http://', ''
+        ).replace('/', '_')
 
         print(f"\n🔍 Scanning {url}...")
         print(f"📁 Will save as: {filename}.txt")
@@ -232,14 +238,22 @@ class UnifiedWebCrawler:
 
         print("\n📊 CRAWL OPTIONS:")
         if depth is None:
-            depth = self.get_input("Crawl depth (1-10)", 2, int)
+            depth = self.get_input(
+            "Crawl depth (1-10)", 2, int
+        )
         else:
             depth = max(1, min(10, depth))
             print(f"Using depth: {depth}")
 
-        threads = self.get_input("Number of threads (1-20)", 8, int)
-        timeout = self.get_input("Timeout per URL (seconds, -1 for none)", -1, int)
-        max_size = self.get_input("Page size limit in KB (-1 for unlimited)", -1, int)
+        threads = self.get_input(
+            "Number of threads (1-20)", 8, int
+        )
+        timeout = self.get_input(
+            "Timeout per URL (seconds, -1 for none)", -1, int
+        )
+        max_size = self.get_input(
+            "Page size limit in KB (-1 for unlimited)", -1, int
+        )
 
         print("\n🎯 FILTERING OPTIONS:")
         subs = self.get_input("Include subdomains? (y/n)", bool, False)
@@ -247,8 +261,12 @@ class UnifiedWebCrawler:
         unique = self.get_input("Show only unique URLs? (y/n)", bool, True)
 
         print("\n📤 OUTPUT OPTIONS:")
-        show_source = self.get_input("Show source types? (y/n)", bool, False)
-        show_where = self.get_input("Show where URLs were found? (y/n)", bool, False)
+        show_source = self.get_input(
+            "Show source types? (y/n)", bool, False
+        )
+        show_where = self.get_input(
+            "Show where URLs were found? (y/n)", bool, False
+        )
         json_output = self.get_input(
             "JSON output format? (y/n)", bool, (export_format == "json")
         )

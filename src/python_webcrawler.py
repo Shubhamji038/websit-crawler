@@ -205,21 +205,23 @@ class PythonWebCrawler:
 
                 # Follow link if it's an href and within depth
                 if source_type == 'href' and depth < self.max_depth:
-                    asyncio.create_task(self._crawl_url(link_url, depth + 1, url))
+                    asyncio.create_task(
+                        self._crawl_url(link_url, depth + 1, url)
+                    )
 
     async def crawl(self, urls: List[str]):
         """Main crawl method."""
         # Setup proxy if provided
         connector_kwargs = {'ssl': self._get_ssl_context()}
-        if self.proxy:
-            connector_kwargs['proxy'] = self.proxy
-
+        
         connector = aiohttp.TCPConnector(**connector_kwargs)
         timeout = ClientTimeout(
             total=self.timeout if self.timeout > 0 else None
         )
 
-        async with ClientSession(connector=connector, timeout=timeout) as session:
+        async with ClientSession(
+            connector=connector, timeout=timeout
+        ) as session:
             self.session = session
 
             tasks = []
@@ -329,7 +331,8 @@ async def main():
     # Check for stdin input
     if sys.stdin.isatty():
         print(
-            "No URLs detected. Hint: echo 'https://example.com' | python python_webcrawler.py",
+            "No URLs detected. Hint: echo 'https://example.com' | "
+            "python python_webcrawler.py",
             file=sys.stderr
         )
         sys.exit(1)
@@ -377,10 +380,10 @@ async def main():
         print(
             "No URLs were found. This usually happens when a domain is specified "
             "(https://example.com), but it redirects to a subdomain "
-            "(https://www.example.com). The subdomain is not included in the scope, "
-            "so no URLs are printed. In order to overcome this, either specify the "
-            "final URL in the redirect chain or use the -subs option to include "
-            "subdomains.",
+            "(https://www.example.com). The subdomain is not included in the "
+            "scope, so no URLs are printed. In order to overcome this, either "
+            "specify the final URL in the redirect chain or use the -subs option "
+            "to include subdomains.",
             file=sys.stderr
         )
 
