@@ -63,12 +63,24 @@ class TestPythonWebCrawler(unittest.TestCase):
         """Test path filtering logic"""
         # Inside path
         crawler_inside = PythonWebCrawler(inside=True)
-        self.assertTrue(crawler_inside._is_inside_path("https://example.com/path", "https://example.com/path/page"))
-        self.assertFalse(crawler_inside._is_inside_path("https://example.com/path", "https://example.com/other"))
+        self.assertTrue(
+            crawler_inside._is_inside_path(
+                "https://example.com/path", "https://example.com/path/page"
+            )
+        )
+        self.assertFalse(
+            crawler_inside._is_inside_path(
+                "https://example.com/path", "https://example.com/other"
+            )
+        )
         
         # No path restriction
         crawler_no_inside = PythonWebCrawler(inside=False)
-        self.assertTrue(crawler_no_inside._is_inside_path("https://example.com/path", "https://example.com/other"))
+        self.assertTrue(
+            crawler_no_inside._is_inside_path(
+                "https://example.com/path", "https://example.com/other"
+            )
+        )
     
     def test_parse_headers(self):
         """Test header parsing functionality"""
@@ -91,7 +103,9 @@ class TestUnifiedWebCrawler(unittest.TestCase):
     
     def setUp(self):
         """Set up test fixtures"""
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+        sys.path.insert(
+            0, os.path.join(os.path.dirname(__file__), '..', 'src')
+        )
         from webcrawler import UnifiedWebCrawler
         self.crawler = UnifiedWebCrawler()
     

@@ -202,10 +202,10 @@ python examples/gui_usage.py
 
 ## 🔗 Repository Links
 
-- **GitHub Repository**: https://github.com/Shubhamji038/python-webcrawler
-- **Issues & Bug Reports**: https://github.com/Shubhamji038/python-webcrawler/issues
-- **Documentation**: https://github.com/Shubhamji038/python-webcrawler/wiki
-- **Contributing**: https://github.com/Shubhamji038/python-webcrawler/blob/main/CONTRIBUTING.md
+- **GitHub Repository**: https://github.com/Shubhamji038/websit-crawler
+- **Issues & Bug Reports**: https://github.com/Shubhamji038/websit-crawler/issues
+- **Documentation**: https://github.com/Shubhamji038/websit-crawler/wiki
+- **Contributing**: https://github.com/Shubhamji038/websit-crawler/blob/main/CONTRIBUTING.md
 
 ## 🤝 Contributing
 

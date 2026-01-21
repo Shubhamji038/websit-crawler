@@ -3,7 +3,7 @@ requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "python-webcrawler"
+name = "websit-crawler"
 version = "1.0.0"
 description = "A comprehensive web crawling solution inspired by hakrawler"
 readme = "docs/README.md"
@@ -47,10 +47,10 @@ gui = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Shubhamji038/python-webcrawler"
-Repository = "https://github.com/Shubhamji038/python-webcrawler"
-Documentation = "https://github.com/Shubhamji038/python-webcrawler/wiki"
-"Bug Tracker" = "https://github.com/Shubhamji038/python-webcrawler/issues"
+Homepage = "https://github.com/Shubhamji038/websit-crawler"
+Repository = "https://github.com/Shubhamji038/websit-crawler"
+Documentation = "https://github.com/Shubhamji038/websit-crawler/wiki"
+"Bug Tracker" = "https://github.com/Shubhamji038/websit-crawler/issues"
 
 [project.scripts]
 webcrawler = "webcrawler:main"

@@ -39,9 +39,9 @@ websit-crawler/
 
 ## 🌐 Online Resources
 
-- **GitHub Repository**: https://github.com/Shubhamji038/python-webcrawler
-- **Issues & Support**: https://github.com/Shubhamji038/python-webcrawler/issues
-- **Wiki**: https://github.com/Shubhamji038/python-webcrawler/wiki
+- **GitHub Repository**: https://github.com/Shubhamji038/websit-crawler
+- **Issues & Support**: https://github.com/Shubhamji038/websit-crawler/issues
+- **Wiki**: https://github.com/Shubhamji038/websit-crawler/wiki
 
 ## 📖 Usage Guides
 

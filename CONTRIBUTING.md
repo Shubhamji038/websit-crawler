@@ -6,7 +6,7 @@ Thank you for your interest in contributing to Python Web Crawler! This document
 
 ### Reporting Bugs
 
-- Use the [issue tracker](https://github.com/Shubhamji038/python-webcrawler/issues) to report bugs
+- Use [issue tracker](https://github.com/Shubhamji038/websit-crawler/issues) to report bugs
 - Provide detailed information about the bug
 - Include steps to reproduce the issue
 - Add relevant error messages and screenshots if applicable
@@ -20,10 +20,10 @@ Thank you for your interest in contributing to Python Web Crawler! This document
 
 ### Code Contributions
 
-1. **Fork the repository**
+1. **Fork** repository
    ```bash
-   git clone https://github.com/Shubhamji038/python-webcrawler.git
-   cd python-webcrawler
+   git clone https://github.com/Shubhamji038/websit-crawler.git
+   cd websit-crawler
    ```
 
 2. **Create a feature branch**

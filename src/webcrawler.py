@@ -52,7 +52,7 @@ class UnifiedWebCrawler:
     def get_input(self, prompt, default=None, input_type=str):
         while True:
             try:
-                if default:
+                if default is not None:
                     user_input = input(f"{prompt} (default: {default}): ").strip()
                     if not user_input:
                         return default
@@ -65,8 +65,14 @@ class UnifiedWebCrawler:
                     return user_input.lower() in ['y', 'yes', 'true', '1']
                 else:
                     return user_input
-            except ValueError:
+            except ValueError as e:
                 print(f"❌ Invalid input. Please enter a valid {input_type.__name__}")
+            except Exception as e:
+                print(f"❌ An error occurred: {e}")
+                if default is not None:
+                    return default
+                else:
+                    raise
     
     def instant_scan(self):
         """Instant one-click scan"""
@@ -154,7 +160,7 @@ class UnifiedWebCrawler:
         
         # Use provided options or ask
         if depth is None:
-            depth = self.get_input("Crawl depth (1-3)", int, 2)
+            depth = self.get_input("Crawl depth (1-3)", 2, int)
             depth = max(1, min(3, depth))
         else:
             depth = max(1, min(3, depth))
@@ -165,7 +171,7 @@ class UnifiedWebCrawler:
             print("1. TXT (URL list)")
             print("2. JSON (with metadata)")
             print("3. CSV (spreadsheet)")
-            format_choice = self.get_input("Choose format (1-3)", int, 1)
+            format_choice = self.get_input("Choose format (1-3)", 1, int)
             format_map = {1: "txt", 2: "json", 3: "csv"}
             export_format = format_map.get(format_choice, "txt")
         else:
@@ -214,14 +220,14 @@ class UnifiedWebCrawler:
         
         print("\n📊 CRAWL OPTIONS:")
         if depth is None:
-            depth = self.get_input("Crawl depth (1-10)", int, 2)
+            depth = self.get_input("Crawl depth (1-10)", 2, int)
         else:
             depth = max(1, min(10, depth))
             print(f"Using depth: {depth}")
         
-        threads = self.get_input("Number of threads (1-20)", int, 8)
-        timeout = self.get_input("Timeout per URL (seconds, -1 for none)", int, -1)
-        max_size = self.get_input("Page size limit in KB (-1 for unlimited)", int, -1)
+        threads = self.get_input("Number of threads (1-20)", 8, int)
+        timeout = self.get_input("Timeout per URL (seconds, -1 for none)", -1, int)
+        max_size = self.get_input("Page size limit in KB (-1 for unlimited)", -1, int)
         
         print("\n🎯 FILTERING OPTIONS:")
         subs = self.get_input("Include subdomains? (y/n)", bool, False)
@@ -285,7 +291,7 @@ class UnifiedWebCrawler:
                 if json_output:
                     self.export_results(filename, "json")
                 else:
-                    format_choice = self.get_input("Format (1=TXT, 2=CSV)", int, 1)
+                    format_choice = self.get_input("Format (1=TXT, 2=CSV)", 1, int)
                     export_format = "txt" if format_choice == 1 else "csv"
                     self.export_results(filename, export_format)
         
@@ -317,10 +323,10 @@ class UnifiedWebCrawler:
             print("❌ No URLs provided")
             return
         
-        depth = self.get_input("Crawl depth (1-5)", int, 2)
+        depth = self.get_input("Crawl depth (1-5)", 2, int)
         depth = max(1, min(5, depth))
         
-        export_format = self.get_input("Export format (1=TXT, 2=JSON, 3=CSV)", int, 1)
+        export_format = self.get_input("Export format (1=TXT, 2=JSON, 3=CSV)", 1, int)
         format_map = {1: "txt", 2: "json", 3: "csv"}
         export_format = format_map.get(export_format, "txt")
         
@@ -433,7 +439,7 @@ class UnifiedWebCrawler:
                 self.batch_scan()
             elif main_option == 5:
                 filename = self.get_input("Filename (without extension)", "export")
-                export_format = self.get_input("Format (1=TXT, 2=JSON, 3=CSV)", int, 1)
+                export_format = self.get_input("Format (1=TXT, 2=JSON, 3=CSV)", 1, int)
                 format_map = {1: "txt", 2: "json", 3: "csv"}
                 self.export_results(filename, format_map.get(export_format, "txt"))
             elif main_option == 6:

@@ -23,13 +23,13 @@ def read_requirements():
     return ['aiohttp>=3.8.0', 'beautifulsoup4>=4.11.0', 'lxml>=4.9.0']
 
 setup(
-    name="python-webcrawler",
+    name="websit-crawler",
     version="1.0.0",
     author="Shubham",
     description="A comprehensive web crawling solution inspired by hakrawler",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/Shubhamji038/python-webcrawler",
+    url="https://github.com/Shubhamji038/websit-crawler",
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
     classifiers=[
@@ -74,8 +74,8 @@ setup(
     zip_safe=False,
     keywords="web crawler scraping hakrawler async",
     project_urls={
-        "Bug Reports": "https://github.com/Shubhamji038/python-webcrawler/issues",
-        "Source": "https://github.com/Shubhamji038/python-webcrawler",
-        "Documentation": "https://github.com/Shubhamji038/python-webcrawler/wiki",
+        "Bug Reports": "https://github.com/Shubhamji038/websit-crawler/issues",
+        "Source": "https://github.com/Shubhamji038/websit-crawler",
+        "Documentation": "https://github.com/Shubhamji038/websit-crawler/wiki",
     },
 )
