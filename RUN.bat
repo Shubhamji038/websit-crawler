@@ -3,7 +3,7 @@ title Python Web Crawler
 color 0A
 echo.
 echo  ========================================
-echo  🕷️  PYTHON WEB CRAWLER
+echo  PYTHON WEB CRAWLER
 echo  ========================================
 echo.
 cd src

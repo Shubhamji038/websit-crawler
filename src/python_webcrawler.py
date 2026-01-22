@@ -43,7 +43,8 @@ class PythonWebCrawler:
         proxy: Optional[str] = None,
         timeout: int = -1,
         disable_redirects: bool = False,
-        custom_headers: Optional[Dict[str, str]] = None
+        custom_headers: Optional[Dict[str, str]] = None,
+        live_output: bool = False
     ):
         self.max_depth = max_depth
         self.max_threads = max_threads
@@ -59,6 +60,7 @@ class PythonWebCrawler:
         self.timeout = timeout
         self.disable_redirects = disable_redirects
         self.custom_headers = custom_headers or {}
+        self.live_output = live_output
 
         self.seen_urls: Set[str] = set()
         self.results: List[Result] = []
@@ -202,6 +204,15 @@ class PythonWebCrawler:
                     where=source_url if self.show_where else ""
                 )
                 self.results.append(result)
+                
+                # Live output if enabled
+                if self.live_output:
+                    line = result.url
+                    if self.show_source:
+                        line = f"[{result.source}] {line}"
+                    if self.show_where and result.where:
+                        line = f"[{result.where}] {line}"
+                    print(line)
 
                 # Follow link if it's an href and within depth
                 if source_type == 'href' and depth < self.max_depth:
